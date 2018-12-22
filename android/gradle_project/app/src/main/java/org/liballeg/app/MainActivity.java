@@ -7,24 +7,26 @@ public class MainActivity extends AllegroActivity {
     static void loadLibrary(String name) {
         try {
             // try loading the debug library first.
-            Log.d("loadLibrary", name + "-debug");
+            Log.d("loadLibrary", name + "-debug...");
             System.loadLibrary(name + "-debug");
+            Log.d("loadLibrary", name + "-debug OK");
         } catch (UnsatisfiedLinkError e) {
             try {
                 // If it fails load the release library.
-                Log.d("loadLibrary", name);
+                Log.d("loadLibrary", name + "...");
                 System.loadLibrary(name);
+                Log.d("loadLibrary", name + " OK");
             }
             catch (UnsatisfiedLinkError e2) {
                 // We still continue as failing to load an addon may
                 // not be a fatal error - for example if the TTF was
                 // not built we can still run an example which does not
                 // need that addon.
-                Log.d("loadLibrary", name + " FAILED");
+                Log.d("loadLibrary", name + " FAILED with " + e2);
             }
         }
     }
-        
+
     static {
         loadLibrary("allegro");
         loadLibrary("allegro_primitives");
